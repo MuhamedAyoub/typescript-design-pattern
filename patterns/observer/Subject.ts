@@ -1,15 +1,16 @@
 import { Observer } from './Observer';
 
 export class Subject {
-	private observers: Array<Observer> = new Array();
+	protected observers: Set<Observer> = new Set<Observer>();
 	public addObserver(observer: Observer): void {
-		this.observers.push(observer);
+		this.observers.add(observer);
 	}
 	public removeObserver(observer: Observer): void {
 		// TODO
-		this.observers?.splice(this.observers.indexOf(observer), 1);
+		this.observers.delete(observer);
 	}
-	public notifyObservers(): void {
+
+	public notifyObservers<T>(): void {
 		this.observers.forEach((observer) => observer.update());
 	}
 }
