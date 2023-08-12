@@ -1,15 +1,15 @@
 import { Observer } from './Observer';
 
-export class UIController {
+export abstract class UIController {
 	private observers = new Set<Observer>();
 
-	public attach(observer: Observer): void {
+	public addEventHandler(observer: Observer): void {
 		this.observers.add(observer);
 	}
 	public detach(observer: Observer): void {
 		this.observers.delete(observer);
 	}
-	public notifyObservers() {
+	protected notifyEventHandlers() {
 		this.observers.forEach((observer) => observer.update());
 	}
 }
